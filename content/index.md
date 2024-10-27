@@ -26,7 +26,7 @@
 
 ### Contribuições
 
-Para contribuir para os conteúdos desta página basta aceder ao repositório desta página () e fazer um *push request* nos conteúdos presentes na pasta `\docs`. Todas as alterações serão revistas e se forem válidas serão implementadas.
+Para contribuir para os conteúdos desta página basta aceder ao repositório desta página [link](https://github.com/NiMouh/mcs-ua) e fazer um *push request* nos conteúdos presentes na pasta `\docs`. Todas as alterações serão revistas e se forem válidas serão implementadas.
 
 >[!note]
 >Qualquer coisa, só contactar pelo meu Discord:  `nimouh`
