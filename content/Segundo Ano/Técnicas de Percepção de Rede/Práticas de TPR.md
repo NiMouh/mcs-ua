@@ -1,4 +1,4 @@
-## <mark style="background: #FFF3A3A6;">Prática 1 - Data Acquisition</mark>
+## ==Prática 1 - Data Acquisition==
 
 ### Wireshark
 
@@ -128,7 +128,7 @@ if __name__ == '__main__':
 $ python baseNFStream.py -r ficheiro.pcap -w conversasNF.dat
 ```
 
-## <mark style="background: #FFF3A3A6;">Prática 2: Data Processing</mark>
+## ==Prática 2: Data Processing==
 
 No *script* `basePktSampling.py`:
 - `-i`: é para o ficheiro de entrada

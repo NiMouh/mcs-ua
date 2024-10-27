@@ -1,5 +1,5 @@
 
-## <mark style="background: #BBFABBA6;">Objetivos</mark>
+## ==Objetivos==
 
 - **Caracterização e identificação de perfis de uso de rede**:
 	- Aquisição
@@ -11,7 +11,7 @@
 	- Deteção de anomalias conhecidas
 	- Deteção de anomalias comportamentais
 
-## <mark style="background: #FFF3A3A6;">Tópico 1: Conhecimento Situacional (Situational Awareness)</mark>
+## ==Tópico 1: Conhecimento Situacional (Situational Awareness)==
 
 Conhecimento, perceção e antecipação de ameaças de segurança que afetam diretamente a rede, os riscos que introduzem e a mitigação de comportamento malicioso.
 
@@ -100,7 +100,7 @@ Tendo como solução:
 	- Propagação
 	- Agregação e Exfiltração
 - Monitorização da rede e dos sistemas
-## <mark style="background: #FFF3A3A6;">Tópico 2: Aquisição de Dados (Data Acquisition)</mark>
+## ==Tópico 2: Aquisição de Dados (Data Acquisition)==
 
 ### Dados
 
@@ -203,7 +203,7 @@ O conjunto de objetos geridos, utilizados para definir informações de equipame
 >- **Type**: Counter32
 >- **Comments**: Number of UDP datagrams delivered to users.
 
-## <mark style="background: #FFF3A3A6;">Tópico 3: Processamento de Dados (Data Processing)</mark>
+## ==Tópico 3: Processamento de Dados (Data Processing)==
 
 Os dados vêm em diferentes **formatos** e **estruturas**, esses dados têm que ser **processados** para depois serem **tratados**.
 
@@ -362,6 +362,6 @@ Em dados de comportamento humano, como acessos a sistemas, os padrões frequente
 >[!definition]
 >***Wavelets*** são funções matemáticas utilizadas para analisar sinais e dados. Permitem identificar padrões temporais e prever comportamentos futuros, como picos de uso durante horários específicos.
 
-## <mark style="background: #FFF3A3A6;">Tópico 4: Perfis de rede (Network Profiling)</mark>
+## ==Tópico 4: Perfis de rede (Network Profiling)==
 
 `Por lecionar...`
