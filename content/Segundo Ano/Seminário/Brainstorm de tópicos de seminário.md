@@ -1,0 +1,11 @@
+- [x] Fernando Batista DPO: Data Privacy Challenges and Training
+- [x] RedShift: Infrastructure Control, Security, and Resilience Challenges
+- [ ] Forense: Prova Digital No Crime Digital
+- [x] ISEP: Trust AI? Is it possible?
+- [x] BitSight: Riscos De Segurança IoT
+- [x] Continental: 
+	- [x] Automotive cybersecurity trends
+	- [x] Automotive Lifecycle? Our Vehicles Will Stop Getting Security Updates?
+- [ ] RIS2049
+	- [x] Challenges in implementing good Information Security pratices
+	- [ ] Universe of Normative References related to Information Security (Portugal)

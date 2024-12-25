@@ -1,5 +1,5 @@
 
-## ==Tópico 1: Conceitos fundamentais==
+## <mark style="background: #FFF3A3A6;">Tópico 1: Conceitos fundamentais</mark>
 
 ### Vulnerabilidades
 
@@ -84,7 +84,7 @@ Existem várias medidas que podem usadas para melhorar a segurança nas redes:
 5. Verificação: verificação da eficácia das correções feitas.
 6. Monitorização: analisar algumas falhas que não foram ou foram corrigidas (pode envolver configuração de firewalls, IDS/NIDS/HIDS).
 
-### Enumeração
+## Enumeração
 É o processo de descobrir informação sobre o sistema.
 
 Estas informações podem vir de:
@@ -130,7 +130,7 @@ A informação deve ser:
 - **Isolada**: As operações devem ser isoladas.
 - **Durável**: A informação deve ser persistente.
 
-## ==Tópico 2: OS Command Injection==
+## <mark style="background: #FFF3A3A6;">Tópico 2: OS Command Injection</mark>
 
 Esta vulnerabilidade permite aos atacantes executar comandos no sistema operativo. Isto acontece porque não é feita uma neutralização de elementos especiais usados em comandos.
 
@@ -188,8 +188,9 @@ Para mitigar esta vulnerabilidade, é recomendado:
 - **Caso seja necessário a execução de comandos, primeiro processar todos os dados de entrada**; 
 
 
-## ==Tópico 3: Broken Authentication==
+## <mark style="background: #FFF3A3A6;">Tópico 3: Broken Authentication</mark>
 
+## Broken Authentication
 Esta vulnerabilidade permite o comprometimento de credenciais, tokens de sessão ou chaves. Isto acontece pois as funcionalidades relacionadas com autenticação e gestão de sessões são implementadas de forma incorreta.
 
 ### Exploração de Broken Authentication
@@ -301,7 +302,7 @@ CORS apresenta alguns riscos, como:
 - **Misplaced trust**: Dados trocados por dois sites é baseado em confiança mútua, caso um dos sites seja comprometido, o outro também será;
 - **Access Control based on Origin**: O Origin Header indica de onde é feito o pedido HTTP, no entanto, este pode ser forjado;
 
-## ==Tópico 4 Concorrência==
+## <mark style="background: #FFF3A3A6;">Tópico 4 Concorrência</mark>
 
 Ambientes distribuidos geralmente causam operações concorrentes, onde duas ou mais operações são executadas simultaneamente.
 
@@ -339,7 +340,7 @@ Para mitigar ambas as vulnerabilidades, é recomendado:
 - Para sistemas remotamente expostos (browser, network), limitar a precisão do temporizador;
 - Para sistemas locais, atualizações de microcódigo e kernel;
 
-## ==Tópico 5: Buffer Overflow==
+## <mark style="background: #FFF3A3A6;">Tópico 5: Buffer Overflow</mark>
 
 Ocorre quando um programa tenta escrever mais dados num buffer do que o buffer pode armazenar (if input > buffer).
 
@@ -405,7 +406,7 @@ Exemplo:
 É uma técnica que permite que um atacante modificar a pilha de execução de um programa para os ponteiros de retorno apontarem para sequências de instruções existentes no programa.
 
 
-## ==Off-Topic: Projetos Úteis==
+## <mark style="background: #FFF3A3A6;">Off-Topic: Projetos Úteis</mark>
 
 - **GTFOBins:** é um projeto que enumera comandos que podem ser explorados para obter privilégios de administrador. O projeto pode ser encontrado em ([link](https://gtfobins.github.io/)).
 - **LOLBAS:** é um projeto que enumera comandos que podem ser explorados para obter privilégios de administrador ([link](https://lolbas-project.github.io/)).

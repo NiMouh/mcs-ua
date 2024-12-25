@@ -5,7 +5,8 @@
 - **Segurança dos Sistemas de Informação**: Inclui a segurança da informação, mas também envolve a proteção dos sistemas
   de ‘hardware’ e ‘software’ que processam e armazenam essas informações.
 
-> Segurança de um Sistema de Informação só se consegue atingir considerando integradamente, Normas e Procedimentos, Sistemas e Aplicações, Infraestrutura e Acesso Físico.
+> Segurança de um Sistema de Informação só se consegue atingir considerando de forma integrada, Normas e Procedimentos,
+> Sistemas e Aplicações, Infraestrutura e Acesso Físico
 
 ## CIA
 

@@ -1,10 +1,10 @@
 - [[Resumos de AAS]]
 - [[Resolução de Frequências AAS]]
 - [Class Notebooks](https://github.com/detiuaveiro/aas/tree/main/notebooks)
+- [Trabalho Prático](https://github.com/NiMouh/IDS)
 
-### Aulas de Fundamentos de Redes
-
-Para quem nunca teve redes, estão aqui os links dos vídeos do Salvador de Fundamentos de Redes:
+> [!IMPORTANT]
+> Para quem nunca teve redes, estão aqui os links dos vídeos do Salvador de Fundamentos de Redes:
 
 https://youtu.be/hQuT36OKI0g
 https://youtu.be/mv3AYeU5WCI

@@ -2,6 +2,7 @@
 
 - [[Resumos de IAA]]
 - [[Práticas de IAA]]
+- [[Trabalhos Práticos IAA]]
 - [[Exames Modelo IAA]]
 - [[Cheat Sheet Linux]]
 
