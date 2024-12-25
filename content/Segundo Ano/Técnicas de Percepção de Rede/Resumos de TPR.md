@@ -54,7 +54,7 @@ Tem impacto sobre como os dados são:
 >[!important]
 > Isto impede a **descoberta de ameaças desconhecidas**.
 
-### Ameaças persistentes (APTs)
+### Ameaças Persistentes Avançadas (*APTs*)
 
 - Tem como foco organizações especifica
 - Explorar novas vulnerabilidades com novas ferramentas
@@ -68,13 +68,14 @@ Tem impacto sobre como os dados são:
 
 Alguns dos ataques feitos, são difíceis de serem classificados corretamente e exigem algum tipo de análise da forma como o utilizador interage com o sistema:
 
-| Ataque                                          | Descrição                                                                                               | Possível forma de deteção                                                                                                 |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Ataque de negação de serviço distribuído (DDoS) | Disrupção de serviço via tráfego gerado em pequenas quantidades por múltiplos dispositivos              | - Avaliar possiveis mudanças de tráfego destino<br>- Avaliar mudanças na periodicidade e tempo de conversação             |
-| Exfiltração de dados                            | Exportação intencional e não autorizada de transferência de dados de um dispositivo para outro externo. | - Monitorizar variância de trafégo enviado<br>- Monitorizar o número de sessões criadas em cada serviço utilizado         |
-| *Ransomware*                                    | Negação de acesso a um utilizador ou organização a um conjunto de dados.                                | - Monitorização dos logs de eventos da máquina procurando por múltiplas modificações a ficheiros num intervalo de tempo   |
-| Command & Control (C2)                          | Comunicação com dispositvos comprometidos sobre a rede.                                                 | - Monitorizar os processos a correr na máquina bem como o tempo em que se encontram em execução                           |
-| Mineração de cripto-moedas                      | Aproveitamento de recursos de máquina comprometida para minerar cripto-moedas.                          | - Avaliar o desempenho das máquinas (CPU, GPU, temperatura)<br>- Monitorizar os processos que estejam a utilizar recursos |
+| Ataque                                          | Descrição                                                                                               | Possível forma de deteção                                                                                                            |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Ataque de negação de serviço distribuído (DDoS) | Disrupção de serviço via tráfego gerado em pequenas quantidades por múltiplos dispositivos              | - Avaliar possiveis mudanças de tráfego destino<br>- Avaliar mudanças na periodicidade e tempo de conversação                        |
+| Exfiltração de dados                            | Exportação intencional e não autorizada de transferência de dados de um dispositivo para outro externo. | - Monitorizar variância de trafégo enviado<br>- Monitorizar o número de sessões criadas em cada serviço utilizado                    |
+| *Ransomware*                                    | Negação de acesso a um utilizador ou organização a um conjunto de dados.                                | - Monitorização dos logs de eventos da máquina procurando por múltiplas modificações a ficheiros num intervalo de tempo              |
+| Command & Control (C2)                          | Comunicação com dispositvos comprometidos sobre a rede.                                                 | - Monitorizar os processos a correr na máquina bem como o tempo em que se encontram em execução                                      |
+| Mineração de cripto-moedas                      | Aproveitamento de recursos de máquina comprometida para minerar cripto-moedas.                          | - Avaliar o desempenho das máquinas (CPU, GPU, temperatura)<br>- Monitorizar os processos que estejam a utilizar recursos            |
+| Ataque homem no meio (MITM)                     | Interceção da comunicação e dados trocados entre máquinas                                               | - Monitorizar a existência de portas abertas que não estejam a ser utilizadas<br>- Monitorizar pedidos de acesso a portas utilizadas |
 
 ### Fases de um Ataque
 
@@ -120,7 +121,6 @@ A solução consiste em:
 ### Dados
 
 Para obter este conhecimento da condição da rede é necessário a **aquisição de dados**, **monitorizando** redes e sistemas de modo a otimizar os serviços e a contra-atacar eventos anómalos.
-
 ### Tipos de dados
 #### Qualitativos
 
@@ -145,20 +145,7 @@ Qualquer informação que pode ser **medida**, em termos estatísticos:
 >- **Packets sent:** 5467
 >- **Bytes seen in the last 10 minutes:** 18471947
 
-### Origem dos dados
-
-Existem várias fontes possíveis de dados:
-- **SNMP**
-	- Aquisição de conhecimento sobre estados atuais de *nodes*/ligações/servidores
-	- Utilização da máquina (e.g. temperatura, utilização do CPU)
-- **Fluxos** (conversações)
-	- Usado para caracterizar a quantidade de tráfego entre utilizadores/servidores
-- **Captura de pacotes**
-- **DPI (Deep-Packet Inspection) vs SPI (Stateful-Packet Inspection) Firewalls**
-- **Logs dos dispositivos**
-- **Medições ativas (e.g. pings)**
-	- Introduz entropia na rede e requer sincronização de *clocks*
-### Formato de dados
+### Formato dos dados
 
 Como os dados são guardados são de extrema importância na hora de avaliar uma captura de rede.
 
@@ -185,29 +172,20 @@ O foco será a **análise de fluxos**, nisto temos:
 - **Fluxos maliciosos**: não é necessário a análise do fluxo por inteiro para a sua deteção
 - **Fluxos normais com atividades anormais**: é necessário analisar o fluxo todo, e caracterizar o seu comportável ao longo dele todo.
 
-### *Nodes*
+### Modos de aquisição de dados
 
-Corresponde a qualquer dispositivo ou sistema ligado a uma rede.
+- **Aquisição Passiva:** Observação e análise do tráfego existente na rede, sem realização tráfego sintético na rede.
+- **Aquisição Ativa**: Envio de tráfego de teste ou a realização de transações sintéticas na rede para obter métricas
 
-Tem várias coisas que podemos extrair de um *node*:
-- Core
-	- *OS version*
-	- *CPU load*
-	- *Memory Usage*
-	- *OS processes*
-	- *Configuration*
-	- *Dynamic Operations*
-- Interface/link
-	- *Link Bandwidth* 
-	- *Throughput* 
-	- *Packet drop* 
-		- *Queue drop* 
-		- *Packet corruption* 
-		- *Link failure* 
-		- *TTL expiration* 
-	- *Queue delay*
+| **Exemplos de aquisição**                                         | **Propósito**                                                                 | **Usado para Obter**                                                                                                                                                                                     |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **SNMP**                                                          | Aquisição de conhecimento sobre estados atuais de _nodes_/ligações/servidores | - Temperatura e utilização de recursos (e.g., CPU, memória, discos).<br><br>- Estado de interfaces de rede (e.g., ativo/inativo, perdas de pacotes).<br><br>- Contagem de processos ou sessões ativas.   |
+| **Fluxos (e.g., NetFlow, sFlow)**                                 | Caracterizar a quantidade de tráfego entre utilizadores/servidores            | - Número de sessões criadas com o correspondente tempo.<br><br>- Protocolos utilizados entre origem e destino.<br><br>- Métricas de fluxos (bytes e pacotes enviados e recebidos).                       |
+| **Captura de pacotes (e.g., DPI, Firewall)**                      | Caracterizar utilizadores e serviços em curtos intervalos                     | - Identificação de IPs de origem/destino e portas associadas.<br><br>- Protocolos e serviços em uso (e.g., HTTP, DNS).<br><br>- Conteúdo trocado (e.g., ficheiros, credenciais, *payloads* específicos). |
+| **Logs de dispositivos ou serviços (e.g., Syslog, Event Viewer)** | Adquirir conhecimento sobre o estado passado e o atual                        | - Registo de autenticações bem-sucedidas ou falhadas.<br><br>- Alterações na configuração do sistema.<br><br>- Eventos de inicialização ou falhas críticas nos serviços.                                 |
+| **Medições ativas (e.g., one-way delay, jitter)**                 | Introduz entropia na rede e requer sincronização de _clocks_                  | - Tempo de latência entre origem e destino.<br><br>- Medição de variações no atraso (jitter).<br><br>- Taxa de perda de pacotes em conexões específicas.                                                 |
 
-### MIB (*Management Information Base*)
+#### SNMP MIB (*Management Information Base*)
 
 O conjunto de objetos geridos, utilizados para definir informações de equipamentos, e criado pelo fabricante.
 
@@ -424,12 +402,21 @@ Possível solução para isto seria a implementação de PCA (*Principal Compone
 
 >[!important]
 >Pode não ser recomendado para este caso onde as diferenças mínimas são as de maior relevância.
-#### Normalização
+#### Normalização e Padronização
 
-É importante ser os dados normalizados e para isso podemos usar métodos conhecidos (e.g. Min/Max, Máximo do valor absoluto, Média). 
+É importante ser os dados normalizados, para isso podemos usar métodos conhecidos:
+- Min/Max
+- Máximo do valor absoluto
+- Z-Score (padronização)
 
-Isto permite remover o *Bias* manter o foco na correlação de variáveis.
+| **Aspeto**                    | **Normalização**                                                                        | **Padronização**                                                             |
+| ----------------------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| **Objetivo**                  | Trazer os valores de uma variável para um intervalo específico, geralmente entre 0 e 1. | Transformar os valores de uma variável para terem média 0 e desvio padrão 1. |
+| **Sensibilidade a anómalias** | Sensível a outliers e ao intervalo dos dados.                                           | Menos sensível a outliers devido ao uso da média e do desvio padrão.         |
+| **Uso**                       | Útil quando é essencial manter o intervalo original dos dados.                          | Eficaz quando os algoritmos assumem uma distribuição normal padrão.          |
 
+>[!objetive]
+>Isto permite remover o *Bias* manter o foco na correlação de variáveis.
 #### Classificação vs. Deteção de anomalias.
 
 Na avaliação de resultados, a classificação envolve ter um histórico vasto de todos os padrões, o que é difícil em redes, pois muitas das vezes para detetar ataques é preciso passar por eles. No caso de deteção de atividades desconhecidas, é feita uma deteção de anomalias, que requer conhecimento de padrões considerados normais.
@@ -447,15 +434,14 @@ Onde cada ponto:
 - Quando chega um ponto novo, ele será classificado de duas maneiras
 	- **Um ponto pertencente a um grupo**: consoante a distância euclidiana do ponto central de cada grupo definido.
 	- **Um ponto anómalo:** distância euclidiana grande dos restantes grupos.
-
 ### *Ensemble*
 
-Este método constrói múltiplos modelos de Machine Learning (normalmente com metodologias diferentes), utilizando o resultado de cada modelo na definição de um único resultado.
+Este método constrói múltiplos modelos de *Machine Learning* (normalmente com metodologias diferentes), utilizando o resultado de cada modelo na definição de um único resultado.
 
 Isto permite:
-- Reduzir a probabilidade de erros individuais.
-- Melhorar a identificação anomalias/comportamentos maliciosos subtis que poderiam passar despercebidos por modelos isolados.
-- Adapta-se facilmente a novos dados, reconhecendo comportamentos maliciosos emergentes.
+- **Reduzir a probabilidade de erros individuais.**
+- **Melhorar a identificação anomalias/comportamentos maliciosos subtis que poderiam passar despercebidos por modelos isolados.**
+- **Adapta-se facilmente a novos dados, reconhecendo comportamentos maliciosos emergentes.**
 
 
 **Exemplo:**
@@ -464,8 +450,8 @@ Isto permite:
 ### Avaliação de um Modelo
 
 No processo de avaliação, o *dataset* é dividido em dois *subsets*:
-- Treino: Criação de perfis de utilização
-- Teste: Avalição de resultados
+- **Treino:** Criação de perfis de utilização
+- **Teste:** Avalição de resultados
 
 ![[Pasted image 20241115141238.png]]
 
@@ -476,12 +462,12 @@ No processo de avaliação, o *dataset* é dividido em dois *subsets*:
 ### Métricas
 
 Na avaliação do modelo, existem dois valores que definem a capacidade da sua previsão:
-- True Positives (TP):
-- False Positives (FP):
+- **True Positives (TP):**
+- **False Positives (FP):**
 
 E dois valores que definem o nível de erro da sua previsão:
-- False Positives (FP)
-- False Negatives (FN)
+- **False Positives (FP)**
+- **False Negatives (FN)**
 
 >[!important]
 >No momento de avaliação, os **falsos positivos** devem ser o **mais baixo possível**, pois assim não causa **ruído**.
