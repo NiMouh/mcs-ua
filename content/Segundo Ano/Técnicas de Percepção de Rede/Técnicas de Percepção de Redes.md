@@ -2,6 +2,7 @@
 - [[Resumos de TPR]]
 - [[Práticas de TPR]]
 - [[Trabalho Prático TPR]]
+- [[Frequência de TPR]]
 - [[Análise de Security Reports]]
 
 

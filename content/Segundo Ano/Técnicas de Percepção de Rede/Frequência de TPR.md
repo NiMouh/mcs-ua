@@ -1,0 +1,14 @@
+
+## Frequências do Ano 21/22
+
+![[TPR_ExameRecurso_28Fevereiro2022.pdf]]
+
+#### Respostas
+
+1.
+	a. (ACESSO INDEVIDO) Para a aquisição, obter os logs dos servidores de autenticação (AD, RADIUS, LDAP) de modo a permitir monitorizar as tentativas de acesso, autenticações bem sucedidas e mal sucedidas bem como o seu horário e centrar os logs usando um SIEM (e.g. Wazuh ou UTMStack) permitindo correlacionar esta informação e definir metricas para detetar atividade anómala. Para o tratamento, implementar regras de correlação para identificar tentativas de acesso vindas de localizações diferentes das habituais, múltiplas tentativas de autenticação incorretas num curto espaço de tempo e possivelmente em diferentes localizações (brute-force), tentativas de acesso com a mesma palavra-passe em diferentes serviços (password-spraying), e tentativas de autenticação fora do horário laboral.
+	b. (C2 ATTACK) Para a aquisição, obter os logs dos terminais e serviços da rede da empresa (Syslog, Sysmon) de modo a permitir monitorizar atividades como criação de processos, eventos de rede e manipulação de ficheiros, algo frequente em botnets, e centrar os logs usando um SIEM (e.g. Wazuh ou UTMStack), detetando padrões que seriam invisíveis caso fossem analisados isoladamente. Para o tratamento, implementar regras de correlação para identificar conexões curtas em intervalos regulares entre os dispositivos e serviços da mesma rede, identificar uso isolado de portas num dado serviço com destino na mesma rede com o uso de protocolos como DNS, HTTP ou HTTPS para mascarar comunicações, comparar o rácio do tráfego interno com outras linhas temporais definindo um *threshold* daquilo que seria o normal com base no comportamento típico de cada dispositivo. 
+	c. (EXFILTRATION) Para a aquisição, obter os logs dos terminais e serviços que foram anteriormente alertados como possivelmente comprometidos (Syslog, Sysmon) e centrar os logs usando um SIEM (e.g. Wazuh ou UTMStack). Para o tratamento, implementar regras de correlação para identificar acessos externos, seja um endereço apenas ou uma gama de endereços associados a um serviço, em comum entre essas máquinas, identificar o periodo temporal onde cada uma comunicou com estes serviços externos de modo a saber quais máquinas acederam a essas máquinas externas em alturas diferentes, identificar periodicidade com que os terminais comunicam com as máquinas externas.
+2. O Ataque DDoS provoca uma disrupção no serviço e durante um ataque o foco será a identificação de clientes lícitos e ilícitos de modo que o serviço continue disponível para os demais. 
+
+![[TPR_Exame_14Fevereiro2022.pdf]]
