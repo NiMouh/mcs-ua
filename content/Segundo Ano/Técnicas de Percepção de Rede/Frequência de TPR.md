@@ -10,13 +10,19 @@
 	a) É importante a diferenciação entre os pedidos licitos e ilicitos para estes poderem ser barrados e garantir a disponibilidade do serviço em questão.
 	b) Para a diferenciação de clientes, pode ser feito um escalograma para tentar detetar existência de pseudoperiodicidade nos pedidos. Pode ser comparado o rácio entre o *download* e *upload* do tráfego recebido por as máquinas a diferenciar de modo a procurar por picos de envio anómalos. Pode ser também diferenciado de clientes licitos, efetuando um histograma que demonstra a distribuição de conexões efetuadas num intervalo de amostragem. 
 3.
-	a) De modo a melhorar o desempenho da deteção de anomalias, usa-se a metodologia ensemble para classificação binária (ser anómalo ou não ser) tradicional (*Bagging*) com os pesos iguais para os três modelos.
-	b) De modo a melhorar o desempenho da deteção de anomalias, usa-se a metodologia ensemble para classificação binária (ser anómalo ou não ser) em sequência (*Boosting*) onde a decisão final é baseada numa combinação ponderada das saídas dos três modelos.
+	a) De modo a melhorar o desempenho da deteção de anomalias, usa-se a metodologia *ensemble* para classificação binária (ser anómalo ou não ser) tradicional (*Bagging*) com os pesos iguais para os três modelos.
+	b) De modo a melhorar o desempenho da deteção de anomalias, usa-se a metodologia *ensemble* para classificação binária (ser anómalo ou não ser) em sequência (*Boosting*) onde a decisão final é baseada numa combinação ponderada das saídas dos três modelos.
 
 
 ![[TPR_ExameRec_6fevereiro2024.pdf]]
 
 1.
+	a) Para aquisição, obter os fluxos HTTPS para servidores externos pelos firewalls (e.g. Netflow), com base nisso, obter métricas como o número de *uploads* e *downloads* entre fluxos, bem como a sua duração. Para o processamento, usar características (*features*) numa janela de observação, como, por exemplo, desvio padrão e média de *uploads* e *downloads*, média e variância de intervalos de silêncio entre fluxos, média e variância de períodos de atividade (sessão).
+	b) Para a aquisição, obter os fluxos DNS (UDP) feitos internamente pelos firewalls (e.g. Netflow) com base nisso, obter métricas, como o número de pacotes e tamanho de *downloads*/*uploads*, bem como os períodos de silêncio entre fluxos e duração de fluxos.
+2.De modo a diferenciar os clientes (lícitos ou ilícitos) num ataque DDoS pode se ter em conta fatores como, (pseudo-)periodicidade nos tempos de atividade (nesta instância poderia ser usados escalogramas), rácio alto entre *upload*/*download* e possíveis mudanças na distribuição de destinos (ASN ou endereços IP anómalos). Isto é feito tanto para diferenciar os clientes que sejam provenientes de redes de parceiros comerciais, como para as restantes redes externas.
+3.
+	a) Utilização do ensemble probabilístico (Baynes Optimal Classifier) entre os cinco modelos de modo, onde as probabilidades são proporcionalmente diretas aos números de falsos positivos de classificação da classe da aplicação a avaliar, fazendo uma classificação binária (ser a classe da aplicação em questão ou não ser).
+	b) Utilizando de uma matriz confusão para avaliar da percentagem de falsos positivos versus falsos negativos, e obtenção de métricas como o F1-score.
 ## Frequências do Ano 21/22
 
 ![[TPR_ExameRecurso_28Fevereiro2022.pdf]]
@@ -28,7 +34,7 @@
 	b. (C2 ATTACK) Para a aquisição, obter os logs dos terminais e serviços da rede da empresa (Syslog, Sysmon) de modo a permitir monitorizar atividades como criação de processos, eventos de rede e manipulação de ficheiros, algo frequente em botnets, e centrar os logs usando um SIEM (e.g. Wazuh ou UTMStack), detetando padrões que seriam invisíveis caso fossem analisados isoladamente. Para o tratamento, implementar regras de correlação para identificar conexões curtas em intervalos regulares entre os dispositivos e serviços da mesma rede, identificar uso isolado de portas num dado serviço com destino na mesma rede com o uso de protocolos como DNS, HTTP ou HTTPS para mascarar comunicações, comparar o rácio do tráfego interno com outras linhas temporais definindo um *threshold* daquilo que seria o normal com base no comportamento típico de cada dispositivo.
 	c. (EXFILTRATION) Para a aquisição, obter os logs dos terminais e serviços que foram anteriormente alertados como possivelmente comprometidos (Syslog, Sysmon) e centrar os logs usando um SIEM (e.g. Wazuh ou UTMStack). Para o tratamento, implementar regras de correlação para identificar acessos externos, seja um endereço apenas ou uma gama de endereços associados a um serviço, em comum entre essas máquinas, identificar o periodo temporal onde cada uma comunicou com estes serviços externos de modo a saber quais máquinas acederam a essas máquinas externas em alturas diferentes, identificar periodicidade com que os terminais comunicam com as máquinas externas.
 
-2. O Ataque DDoS provoca uma disrupção no serviço e durante um ataque o foco será a identificação de clientes lícitos e ilícitos de modo que o serviço continue disponível para os demais. 
+2. O Ataque DDoS provoca uma disrupção no serviço e durante um ataque o foco será a identificação de clientes lícitos e ilícitos de modo que o serviço continue disponível para os demais. De modo a diferenciar os clientes (lícitos ou ilícitos) num ataque DDoS pode se ter em conta fatores como, (pseudo-)periodicidade nos tempos de atividade (nesta instância poderia ser usados escalogramas), rácio alto entre *upload*/*download*, rácio anómalo (com base em histórico) de pedidos GET/POST e possíveis mudanças na distribuição de destinos (ASN ou endereços IP anómalos).
 
 ![[TPR_Exame_14Fevereiro2022.pdf]]
 
