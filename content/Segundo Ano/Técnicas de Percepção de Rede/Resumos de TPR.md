@@ -45,10 +45,10 @@ Os dados são capturados e analisados de modo a **confirmar observações anteri
 ![[Survivorship-bias.svg.png|600]]
 
 > [!example]
-> Blindagem dos aviões feita com base nos lugares onde foram **por norma** acertados, **desconsiderando** os restantes lugares.
+> Blindagem dos aviões feita com base nos lugares onde **não foram** acertados, **desconsiderando** os restantes lugares. Pois se o avião voltou intacto, supostamente aquela zona não precisa reforço.
 
 Tem impacto sobre como os dados são:
-- Colecionados
+- Colecionados (Recolhidos)
 - Analisados
 
 >[!important]
@@ -65,19 +65,39 @@ Tem impacto sobre como os dados são:
 	- Ajusta a tática com base nas defesas
 ### Tipos de Ataques Comportamentais
 
-Alguns dos ataques feitos, são difíceis de serem classificados corretamente e exigem algum tipo de análise da forma como o utilizador interage com o sistema:
+Existem várias coisas que podem ser feitas para mitigar estes ataques:
+- **Ataques de disrupção**
+	- *Load balancers*
+	- Maior poder computacional
+	- Limites de tráfego
+	- Whitelist de endereços benignos
+	- *Web Application Firewall* (WAF)
+	- Reverse Proxies
+- **Exfiltração de dados**
+	- Implementação de firewalls na rede (Segmentação)
+	- Implementação de soluções de *Data Loss Preventation* (DLP)
+	- Uso de sistema de deteção de intrusão (IDS)
+	- Bloqueio de canais de comunicação não autorizados
+- **C2 (*Command & Controls*)**
+	- Blacklist de servidores C2 conhecidos
+	- Criação de políticas para tráfego DNS externo
+	- Implementação de firewalls na rede (Segmentação)
+	- Ferramentas que detetam atividades suspeitas (*Signature-based*)
+	- Uso de métodos criptográficos
+	- Bloqueio de canais de comunicação não autorizados (e.g. Acesso Remoto, SSH, RDP)
 
-| **Ataque**                  | **Descrição**                                                                                                 | Ter atenção a                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ataque de Disrupção (DoS)   | Disrupção de serviço via tráfego gerado em abundância por múltiplos dispositivos, afetando a disponibilidade. | - Feito sobre TCP ou UDP<br><br>- Uso de fraquezas nos protocolos de rede (e.g. SYN Flood, ACK Flood) <br><br>- Picos de tráfego destino em comparação com padrões normais <br><br>- Alterações súbitas na periodicidade e duração de conversações mais curtas<br><br>- Múltiplos pedidos simultâneos para o mesmo serviço de várias origens<br><br>- Grande volume de erros ou de pedidos feitos da mesma origem (e.g. HTTP GET/POST)<br><br>- Distribuição heterogénea de ASNs |
-| Exfiltração de dados        | Exportação intencional e não autorizada de dados de um dispositivo para um destino externo                    | - Variação no volume de tráfego enviado para endereços externos  <br><br>- Conexões com destinos anômalos ou desconhecidos<br><br>- Presença de pseudoperiodicidade no envio de informação para o exterior.<br><br>- Inspecionar os dados para padrões ou conteúdos suspeitos (e.g., transferências de grandes ficheiros)<br><br>- Movimentação anómala de ficheiros classificados como confidenciais                                                                            |
-| _Ransomware_                | Negação de acesso a dados de um utilizador ou organização via encriptação                                     | - Monitorizar logs em busca de múltiplas modificações ou exclusões de ficheiros num curto espaço de tempo  <br><br>- Verificar a criação de ficheiros com extensões incomuns ou encriptadas  <br><br>- Identificar tentativas de acesso a backups                                                                                                                                                                                                                                |
-| Command & Control (C2)      | Comunicação de dispositivos comprometidos com um servidor de controlo                                         | - Normalmente feito sobre os protocolos TCP, SSL, HTTP, HTTPS, UDP, e DNS.<br><br>- Monitorizar processos em execução na máquina por longos períodos  <br><br>- Identificar conexões regulares ou anómalas para IPs externos  <br><br>- Presença de pseudoperiodicidade no envio de informação para o exterior.<br><br>- Analisar padrões de tráfego fora do horário habitual                                                                                                    |
-| Mineração de cripto-moedas  | Utilização não autorizada de recursos computacionais para minerar cripto-moedas                               | - Desempenho da máquina (CPU, GPU, temperatura)  <br><br>- Processos que consomem recursos elevados de forma contínua<br><br>- Existência de periodicidade nos intervalos de picos de tráfego<br><br>- Aumentos súbitos no consumo de energia ou desempenho                                                                                                                                                                                                                      |
-| Ataque homem no meio (MITM) | Interceção da comunicação e dados trocados entre máquinas                                                     | - Alterações anómalas na latência das conexões <br> <br>- Inspecionar tráfego para identificar respostas duplicadas ou retransmissões incomuns  <br><br>- Detectar alterações em certificados SSL ou assinaturas de comunicação                                                                                                                                                                                                                                                  |
-| Acesso Indevido             | Acesso externo à rede utilizando credenciais válidas comprometidas                                            | - Acessos de localizações geográficas incomuns (GeoIP)  <br><br>- Tentativas de acesso fora do horário laboral  <br><br>- Múltiplas autenticações de locais diferentes para a mesma conta (impossible travel)  <br><br>- Tentativas de *brute force* ou *password-spraying*  <br><br>- Correlacionar tentativas de acessos suspeitos entre serviços                                                                                                                              |
-| SPAM                        | Envio em massa de emails ou mensagens para pessoas que não deram consentimento.                               | - Emails de uma origem para múltiplos destinos num curto período temporal<br><br>- (Pseudo-) Periodicidade no envio de múltiplos mails<br><br>- Múltiplas tentativas de login efetuadas/falhadas<br><br>- Envio constante de ficheiros e/ou hiperligações<br><br>- Mudanças súbitas no tamanho de emails<br><br>- Se os endereços que enviaram encontram-se na lista negra                                                                                                       |
+Além disso, estes ataques podem ser prevenidos fazendo a **deteção de anomalias através da criação de perfis de comportamento:**
 
+| **Ataque**                  | **Descrição**                                                                                                 | Ter atenção a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Ataque de Disrupção (DoS)   | Disrupção de serviço via tráfego gerado em abundância por múltiplos dispositivos, afetando a disponibilidade. | - Feito sobre TCP ou UDP<br><br>- Uso de fraquezas nos protocolos de rede (e.g. SYN Flood, ACK Flood) <br><br>- Picos de tráfego destino em comparação com padrões normais <br><br>- Alterações súbitas na periodicidade e duração de conversações mais curtas<br><br>- Múltiplos pedidos simultâneos para o mesmo serviço de várias origens<br><br>- Grande volume de erros ou de pedidos feitos da mesma origem (e.g. HTTP GET/POST)<br><br>- Distribuição heterogénea de ASNs                                                                             |
+| Exfiltração de dados        | Exportação intencional e não autorizada de dados de um dispositivo para um destino externo                    | - Variação no volume de tráfego enviado para endereços externos  <br><br>- Conexões com destinos anômalos ou desconhecidos<br><br>- Presença de pseudoperiodicidade no envio de informação para o exterior.<br><br>- Inspecionar os dados por padrões ou conteúdos suspeitos (e.g., transferências de grandes ficheiros)<br><br>- Movimentação anómala de ficheiros classificados como confidenciais                                                                                                                                                         |
+| _Ransomware_                | Negação de acesso a dados de um utilizador ou organização via encriptação                                     | - Monitorizar logs em busca de múltiplas modificações ou exclusões de ficheiros num curto espaço de tempo  <br><br>- Verificar a criação de ficheiros com extensões incomuns ou encriptadas  <br><br>- Identificar tentativas de acesso a backups                                                                                                                                                                                                                                                                                                            |
+| Command & Control (C2)      | Comunicação de dispositivos comprometidos com um servidor de controlo                                         | - Normalmente feito sobre os protocolos TCP, SSL, HTTP, HTTPS, UDP, e DNS.<br><br>- Verificar existência de headers anómalos nos pacotes<br><br>- Monitorizar processos em execução na máquina por longos períodos  <br><br>- Identificar conexões regulares ou anómalas para IPs externos  <br><br>- Comunicação anómala com máquinas de outra rede (possível expansão de botnet ou coordenadação de ataque)<br><br>- Presença de pseudoperiodicidade no envio de informação para o exterior.<br><br>- Analisar padrões de tráfego fora do horário habitual |
+| Mineração de cripto-moedas  | Utilização não autorizada de recursos computacionais para minerar cripto-moedas                               | - Desempenho da máquina (CPU, GPU, temperatura)  <br><br>- Processos que consomem recursos elevados de forma contínua<br><br>- Existência de periodicidade nos intervalos de picos de tráfego<br><br>- Aumentos súbitos no consumo de energia ou desempenho                                                                                                                                                                                                                                                                                                  |
+| Ataque homem no meio (MITM) | Interceção da comunicação e dados trocados entre máquinas                                                     | - Alterações anómalas na latência das conexões <br> <br>- Inspecionar tráfego para identificar respostas duplicadas ou retransmissões incomuns  <br><br>- Detectar alterações em certificados SSL ou assinaturas de comunicação                                                                                                                                                                                                                                                                                                                              |
+| Acesso Indevido             | Acesso externo à rede utilizando credenciais válidas comprometidas                                            | - Acessos de localizações geográficas incomuns (GeoIP)  <br><br>- Tentativas de acesso fora do horário laboral  <br><br>- Múltiplas autenticações de locais diferentes para a mesma conta (impossible travel)  <br><br>- Tentativas de *brute force* ou *password-spraying*  <br><br>- Correlacionar tentativas de acessos suspeitos entre serviços                                                                                                                                                                                                          |
+| SPAM                        | Envio em massa de emails ou mensagens para pessoas que não deram consentimento.                               | - Emails de uma origem para múltiplos destinos num curto período temporal<br><br>- (Pseudo-) Periodicidade no envio de múltiplos mails<br><br>- Múltiplas tentativas de login efetuadas/falhadas<br><br>- Envio constante de ficheiros e/ou hiperligações<br><br>- Mudanças súbitas no tamanho de emails<br><br>- Se os endereços que enviaram encontram-se na lista negra                                                                                                                                                                                   |
 ### Fases de um Ataque
 
 Um ataque tem as seguintes fases:
@@ -94,18 +114,18 @@ Os ataques são feitos de maneira **incremental**, via escalada de privilégios.
 > Para implementar as diferentes fases de ataque, **máquinas legitimas têm que estar comprometidas**.
 
 A **infiltração** pode ser feita:
-- Abusando remotamente de utilizadores lícitos (e.g. *phising*, *vishing*)
-- Remotamente mediante ações do atacante (e.g. exploração de vulnerabilidades na rede/sistema).
-- Interação física (e.g. *wire-tapping*, portas USB)
+- **Abusando remotamente de utilizadores lícitos (e.g. *phising*, *vishing*)**
+- **Remotamente mediante ações do atacante (e.g. exploração de vulnerabilidades na rede/sistema).**
+- **Interação física (e.g. *wire-tapping*, portas USB)**
 
 A **propagação** usa um conjunto de metodologias:
-- Exploração de credenciais
-- Falsificando utilizadores e sistemas
-- Exploração de vulnerabilidades
+- **Exploração de credenciais**
+- **Falsificando utilizadores e sistemas**
+- **Exploração de vulnerabilidades**
 
 A **agregação** e **exfiltração** envolve transferência de dados M2M (*machine-to-machine*), isto pode ser feito:
-- Internamente (Agregação)
-- Externamente (Exfiltração)
+- **Internamente (Agregação)**
+- **Externamente (Exfiltração)**
 ### Desafios
 
 Defesas de rede/sistemas tradicionais **não conseguem** garantir a segurança total das máquinas, **nem a prevenção de infiltração**:
@@ -113,9 +133,9 @@ Defesas de rede/sistemas tradicionais **não conseguem** garantir a segurança t
 - Novas ameaças aparecem a toda hora
 
 A solução consiste em:
-- Tentar detetar o ataque nas fases mais importantes
-	- Propagação
-	- Agregação e Exfiltração
+- Tentar detetar o ataque nas fases mais importantes:
+	- **Propagação**
+	- **Agregação e Exfiltração**
 - Monitorização da rede e dos sistemas
 ## <mark style="background: #FFF3A3A6;">Tópico 2: Aquisição de Dados (Data Acquisition)</mark>
 
